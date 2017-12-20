@@ -6,13 +6,16 @@ Created on Thu Dec 14 16:12:43 2017
 """
 
 #imports
-from flask import Flask, render_template, json, request
+from flask import Flask, render_template, json, request, session, redirect
 from werkzeug import generate_password_hash, check_password_hash
 from flask.ext.mysql import MySQL
 
 #initialize the flask and SQL Objects
 app = Flask(__name__)
 mysql = MySQL()
+
+#initializa secret key
+app.secret_key='This is my secret key'
 
 #configure MYSQL
 app.config['MYSQL_DATABASE_USER'] = 'Arjun'
@@ -21,21 +24,21 @@ app.config['MYSQL_DATABASE_DB'] = 'BucketList'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
-#create MySQL Connection
-conn = mysql.connect()
-
-#create a cursor to query the stored procedure
-cursor = conn.cursor()
-
+#helper functions
+def check_password(acc_pass, provided_pass):
+	#provided_pass = generate_password_hash(provided_pass)
+	if provided_pass==acc_pass:
+		return True
+	return False
 
 #define methods for routes (what to do and display)
 @app.route("/")
 def main():
-    return render_template('index.html')
+    return render_template('trial_home_page.html')
 
 @app.route("/main")
 def return_main():
-    return render_template('index.html')
+    return render_template('trial_home_page.html')
 
 @app.route('/showSignUp')
 def showSignUp():
@@ -45,12 +48,66 @@ def showSignUp():
 def showSignIn():
 	return render_template('signin.html')
 
+@app.route('/userHome')
+def showUserHome():
+	#check that someone has logged in correctly
+	if session.get("user"):
+		return render_template('userHome.html', username=session.get("user")[1])
+	else:
+		return render_template('error.html', error = "Invalid User Credentials")
+
+@app.route('/logout')
+def logout():
+	session.pop('user', None)
+	return redirect('/')
+
+@app.route('/validateLogin', methods=['POST'])
+def validate():
+	try:
+		_username = request.form['inputEmail']
+		_password = request.form['inputPassword']
+		print("Username:", _username, "\n Password:", _password)
+
+		#create MySQL Connection
+		conn = mysql.connect()
+		#create a cursor to query the stored procedure
+		cursor = conn.cursor()
+		print("successfully connected to mysql!")
+
+		#get users with this username (should only be one)
+		cursor.callproc('sp_validateLogin', (_username,))
+		users = cursor.fetchall()
+		print("called process")
+		#acctually validate these users
+		if len(users)>0:
+			if check_password(users[0][3], _password):
+				session['user']=users[0]
+				return redirect('/userHome')
+			else:
+				return render_template('error.html', error="incorrect username or password")
+		else:
+			return render_template('error.html', error= "incorrect username or password")
+
+	except Exception as ex:
+		print("Error getting username and password, Error:", ex)
+		return render_template('error.html', error = 'Missing Email Adress or Password')
+	finally:
+		#disconnect from mysql database
+		cursor.close()
+		conn.close()
+
 @app.route('/signUp', methods=['POST'])
 def signUp():
 	"""
 	method to deal with creating a new user in the MySQL Database
 	"""
 	print("signing up user...")
+	#create MySQL Connection
+	conn = mysql.connect()
+
+	#create a cursor to query the stored procedure
+	cursor = conn.cursor()
+
 	try:
 		#read in values from frontend
 		_name = request.form['inputName']
@@ -87,6 +144,8 @@ def signUp():
 
 	finally:
 		print('ending...')
+		cursor.close()
+		conn.close()
 
 
 
