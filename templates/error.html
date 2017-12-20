@@ -15,19 +15,25 @@
 <body>
  
     <div class="container">
-        <div class="header">
-            <nav>
-                <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="#">Home</a>
-                    </li>
-                    <li role="presentation"><a href="/showSignIn">Sign In</a>
-                    </li>
-                    <li role="presentation"><a href="/showSignUp">Sign Up</a>
-                    </li>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <h3 class="navbar-brand">Python Flask App</h3>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample05">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="showSignUp">SignUp</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="showSignIn">SignIn</a>
+                  </li>
                 </ul>
-            </nav>
-            <h3 class="text-muted">Python Flask App</h3>
-        </div>
+            </div>
+        </nav>
  
         <div class="jumbotron">
             <h1>{{error}}</h1>

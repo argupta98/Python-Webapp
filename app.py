@@ -34,11 +34,11 @@ def check_password(acc_pass, provided_pass):
 #define methods for routes (what to do and display)
 @app.route("/")
 def main():
-    return render_template('trial_home_page.html')
+    return render_template('index.html')
 
 @app.route("/main")
 def return_main():
-    return render_template('trial_home_page.html')
+    return render_template('index.html')
 
 @app.route('/showSignUp')
 def showSignUp():

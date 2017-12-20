@@ -12,19 +12,22 @@
  
 <body>
     <div class="container">
-        <nav class="nav navbar-light bg-faded">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <h3 class="navbar-brand">Python Flask App</h3>
-            <div id="Navbar">
-                <ul class="navbar-nav">
-                    <li class="active" role="presentation">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li role="presentation">
-                        <a class="nav-link" href="showSignIn">SignIn</a>
-                    </li>
-                    <li role="presentation">
-                        <a class="nav-link" href="showSignUp">SignUp</a>
-                    </li>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample05">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="showSignUp">SignUp</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="showSignIn">SignIn</a>
+                  </li>
                 </ul>
             </div>
         </nav>
@@ -34,7 +37,9 @@
         <div class="jumbotron">
             <h1>Bucket List App</h1>
             <p class="lead"></p>
-            <p><a class="btn btn-lg btn-success" href="showSignUp" role="button">Sign up today</a>
+            <p>
+            <a class="btn btn-lg btn-success" href="showSignUp" role="button">Sign up</a>   
+            <a class="btn btn-lg btn-success" href="showSignIn" role="button">Sign in</a>
             </p>
         </div>
  

@@ -3,7 +3,6 @@
  
 <head>
     <title>Python Flask Bucket List App</title>
-    
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <link href="../static/css/signup.css" rel="stylesheet">
@@ -12,17 +11,20 @@
  
 <body background="https://singularityhub.com/wp-content/uploads/2015/08/autistic-neural-network-3.jpg">
     <div class="container">
-        <div class="header">
-            <nav>
-                <ul class="nav nav-pills pull-right">
-                    <li><p class="text-muted"> Logged in as {{username}} </p> 
-                    </li>
-                    <li role="presentation" class="active"><a href="/logout">Logout</a>
-                    </li>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <h3 class="navbar-brand">Python Flask App</h3>
+            <span class="navbar-text">Logged in as {{username}}</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample05">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="logout">Logout<span class="sr-only">(current)</span></a>
+                  </li>
                 </ul>
-            </nav>
-            <h3 class="text-muted">Python Flask App</h3>
-        </div>
+            </div>
+        </nav>
  
         <div class="jumbotron">
             <h1>Welcome Home {{username}}!</h1>
