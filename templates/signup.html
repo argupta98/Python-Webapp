@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <title>Python Flask Bucket List App</title>
- 
-    
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
- 
+
+    <link rel="stylesheet" href="../static/css/signup.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
 
-    <link href="../static/css/signup.css" rel="stylesheet">
-
     <script src="../static/js/jquery-3.2.1.js"></script>
+    <script src="../static/js/SignUp.js"></script>   
 
-    <script src="../static/js/SignUp.js"></script>
-    
   </head>
- 
+
   <body>
- 
+  <!--create the Navbar-->
     <div class="container">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <h3 class="navbar-brand">Python Flask App</h3>
@@ -27,10 +24,10 @@
             <div class="collapse navbar-collapse" id="navbarsExample05">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="main">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="showSignUp">SignUp</a>
+                    <a class="nav-link" href="#">SignUp<span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="showSignIn">SignIn</a>
@@ -38,7 +35,18 @@
                 </ul>
             </div>
         </nav>
- 
+    </div>
+
+  <!--Set up alerts to be shown if there is success or failure-->
+    <div class="container" id="success-container">
+      <div class="alert alert-success" id="success">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong id="success-msg"></strong>
+      </div>
+    </div>
+
+  <!-- set up form-->
+    <div class="container">
       <div class="jumbotron">
         <h1>Bucket List App</h1>
         <form class="form-signin">
@@ -48,17 +56,9 @@
         <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
-         
         <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button">Sign up</button>
       </form>
       </div>
- 
-       
- 
-      <footer class="footer">
-        <p>&copy; Company 2015</p>
-      </footer>
- 
     </div>
   </body>
 </html>

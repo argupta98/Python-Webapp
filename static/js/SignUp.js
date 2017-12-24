@@ -1,4 +1,5 @@
-$(function() {
+
+$(function() {    
     $('#btnSignUp').click(function() {
  
         $.ajax({
@@ -6,7 +7,9 @@ $(function() {
             data: $('form').serialize(),
             type: 'POST',
             success: function(response) {
-                console.log(response);
+                var x = document.getElementById("success");
+                x.style.display = "block";
+                document.getElementById('success-msg').innerHTML = response;
             },
             error: function(error) {
                 console.log(error);

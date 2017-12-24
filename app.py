@@ -24,7 +24,7 @@ app.config['MYSQL_DATABASE_DB'] = 'BucketList'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
-#helper functions
+#helper function
 def check_password(acc_pass, provided_pass):
 	#provided_pass = generate_password_hash(provided_pass)
 	if provided_pass==acc_pass:
@@ -47,6 +47,10 @@ def showSignUp():
 @app.route('/showSignIn')
 def showSignIn():
 	return render_template('signin.html')
+
+@app.route('/wishlist')
+def wishlist():
+	return render_template('wishlist.html')
 
 @app.route('/userHome')
 def showUserHome():
@@ -91,6 +95,7 @@ def validate():
 	except Exception as ex:
 		print("Error getting username and password, Error:", ex)
 		return render_template('error.html', error = 'Missing Email Adress or Password')
+
 	finally:
 		#disconnect from mysql database
 		cursor.close()
@@ -102,12 +107,6 @@ def signUp():
 	method to deal with creating a new user in the MySQL Database
 	"""
 	print("signing up user...")
-	#create MySQL Connection
-	conn = mysql.connect()
-
-	#create a cursor to query the stored procedure
-	cursor = conn.cursor()
-
 	try:
 		#read in values from frontend
 		_name = request.form['inputName']
@@ -117,9 +116,16 @@ def signUp():
 		#Make sure we got all the values
 		if _name and _email and _password:
 			print("Email:", _email, "\n", "Name:", _name, "\n", "Password:", _password)
-			#hash password for security
+	
+			#create MySQL Connection
+			conn = mysql.connect()
+			#create a cursor to query the stored procedure
+			cursor = conn.cursor()
+
+			#has passowrd for security
 			_hashed_password = generate_password_hash(_password)
 			print("Hashed Password:", _hashed_password)
+
 			#call jQuery to make a POST request to the DB with the info
 			cursor.callproc('sp_createUser', (_name, _email, _password))
 			print("Successfully called sp_createUser")
