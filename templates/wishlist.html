@@ -13,9 +13,9 @@
  
 <body>
     <div class="container">
+        <!--navbar-->
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <h3 class="navbar-brand">Python Flask App</h3>
-            <span class="navbar-text">Logged in as {{username}}</span>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -30,8 +30,42 @@
                 </ul>
             </div>
         </nav>
-        <div class="jumbotron">
-            <p> Testing... </p>
+
+        <section>
+            <div class="jumbotron">
+            <form class="form-horizontal" method="post" action="/addWish">
+                <fieldset>
+                    <!-- Form Name -->
+                    <legend>Create Your Wish</legend>
+ 
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtTitle">Title</label>
+                        <div class="col-md-4">
+                            <input id="txtTitle" name="inputTitle" type="text" placeholder="Title" class="form-control input-md">
+                        </div>
+                    </div>
+ 
+                    <!-- Textarea -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtPost">Post</label>
+                        <div class="col-md-4">
+                            <textarea class="form-control" id="txtPost" name="inputDescription" placeholder="Description"></textarea>
+                        </div>
+                    </div>
+ 
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="singlebutton"></label>
+                        <div class="col-md-4">
+                            <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="Publish" />
+                        </div>
+                    </div>
+ 
+                </fieldset>
+            </form>
+            </div>
+        </section>
         </div>
-    </div>
-<body>
+ </body>
+</html>

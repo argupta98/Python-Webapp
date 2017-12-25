@@ -10,6 +10,11 @@ div#success{
 	display: none;
 }
 
+.list-group{
+	color: white;
+	border-color: white;
+	padding: 5px;
+}
 .alert{
 	margin-bottom: 0px;
 }

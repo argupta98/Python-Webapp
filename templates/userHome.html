@@ -9,8 +9,39 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
 
+    <script src="../static/js/jquery-3.2.1.js"></script>
+
 </head>
- 
+<script>
+    $(function() {
+        $.ajax({
+            url: '/getWish',
+            type: 'GET',
+            success: function(res) {
+                var div = $('<div>')
+                .attr('class', 'list-group')
+                .append($('<a>')
+                    .attr('class', 'list-group-item active')
+                    .append($('<h4>')
+                        .attr('class', 'list-group-item-heading'),
+                        $('<p>')
+                        .attr('class', 'list-group-item-text')));
+                var wishObj = JSON.parse(res);
+				var wish = '';
+				
+				$.each(wishObj,function(index, value){
+					wish = $(div).clone();
+					$(wish).find('h4').text(value.Title);
+					$(wish).find('p').text(value.Description);
+					$('.jumbotron').append(wish);
+                        });
+                    },
+                        error: function(error) {
+                            console.log(error);
+                    }
+        });
+    });
+</script>
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -29,9 +60,15 @@
                 </ul>
             </div>
         </nav>
- 
+
         <div class="jumbotron">
             <h1>Welcome Home {{username}}!</h1>
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">Wish Title</h4>
+                    <p class="list-group-item-text">Wish Description</p>
+                </a>
+            </div>
         </div>
 
         <footer class="footer">       
