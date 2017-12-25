@@ -107,6 +107,11 @@ def signUp():
 	method to deal with creating a new user in the MySQL Database
 	"""
 	print("signing up user...")
+	#create MySQL Connection
+	conn = mysql.connect()
+	#create a cursor to query the stored procedure
+	cursor = conn.cursor()
+
 	try:
 		#read in values from frontend
 		_name = request.form['inputName']
@@ -116,13 +121,7 @@ def signUp():
 		#Make sure we got all the values
 		if _name and _email and _password:
 			print("Email:", _email, "\n", "Name:", _name, "\n", "Password:", _password)
-	
-			#create MySQL Connection
-			conn = mysql.connect()
-			#create a cursor to query the stored procedure
-			cursor = conn.cursor()
-
-			#has passowrd for security
+			#hash passowrd for security
 			_hashed_password = generate_password_hash(_password)
 			print("Hashed Password:", _hashed_password)
 
@@ -135,14 +134,14 @@ def signUp():
 			if len(data)==0:
 				conn.commit()
 				print('signup successful!')
-				return json.dumps({'message':'User created successfuly!'})
+				return 'User created successfuly!'
 			else:
 				print('error')
-				return json.dumps({'error':str(data[0])})
+				return str(data[0])
 
 		else:
 			print('fields not submitted')
-			return json.dumps({'html' : '<span>Enter the required fields</span>'})
+			return 'Enter the required fields'
 
 	except Exception as ex:
 		print('got an exception: ', ex)
