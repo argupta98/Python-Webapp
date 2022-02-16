@@ -7,8 +7,8 @@ Created on Thu Dec 14 16:12:43 2017
 
 #imports
 from flask import Flask, render_template, json, request, session, redirect
-from werkzeug import generate_password_hash, check_password_hash
-from flask.ext.mysql import MySQL
+from werkzeug.security import generate_password_hash, check_password_hash
+from flaskext.mysql import MySQL
 
 #initialize the flask and SQL Objects
 app = Flask(__name__)
